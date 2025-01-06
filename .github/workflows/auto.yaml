@@ -1,0 +1,23 @@
+name: Auto Renew Actions
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 */30 * *"
+
+jobs:
+  auto-renew:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Commit update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "自动更新于北京时间： $(TZ='Asia/Shanghai' date +"%Y年%m月%d日%H:%M:%S")" >> auto_renew.log
+          git config user.name "Zzzwb Bot"
+          git config user.email "bot@zzzwb.com"
+          git add auto_renew.log
+          git commit -m "更新actions"
+          git push
