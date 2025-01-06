@@ -18,6 +18,6 @@ jobs:
           echo "自动更新于北京时间： $(TZ='Asia/Shanghai' date +"%Y年%m月%d日%H:%M:%S")" >> auto_renew.txt
           git config user.name "Zzzwb Bot"
           git config user.email "bot@zzzwb.com"
-          git add auto_renew.log
+          git add auto_renew.txt
           git commit -m "更新actions"
           git push
